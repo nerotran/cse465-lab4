@@ -29,23 +29,31 @@ parent_of(james, harry).
 %  NOTE: If possible, avoid using 
 %        disjunction (;) in your rules
 
-%TODO: Write father_of/2
+% TODO: Write father_of/2
+father_of(X,N) :- male(X), parent_of(X,N).
  
-%TODO: Write mother_of/2
+% TODO: Write mother_of/2
+mother_of(X,N) :- female(X), parent_of(X,N).
 
-%TODO: Write grandfather_of/2
+% TODO: Write grandfather_of/2
+grandfather_of(X,N) :- father_of(X,F), male(F), father_of(F,N).
+grandfather_of(X,N) :- father_of(X,F), female(F), mother_of(F,N).
  
 % TODO: Write grandmother_of/2
+grandmother_of(X,N) :- mother_of(X,F), male(F), father_of(F,N).
+grandmother_of(X,N) :- mother_of(X,F), female(F), mother_of(F,N).
 
 % TODO: Write sister_of/2
 %      HINT: Use multiple clauses instead of disjunction
- 
+sister_of(X,N) :- parent_of(F,N), parent_of(F,X), female(X), X /= N. 
 
 % TODO: Write aunt_of/2
-
+aunt_of(X,N) :- parent_of(P,N), sister_of(X,P).
  
 % TODO: Write ancestor_of
-
+ancestor_of(X,N) :- parent_of(X,N).
+ancestor_of(X,N) :- grandfather_of(X,N).
+ancestor_of(X,N) :- grandmother_of(X,N).
 
 %% Tests
 
