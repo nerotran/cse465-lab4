@@ -45,7 +45,7 @@ grandmother_of(X,N) :- mother_of(X,F), female(F), mother_of(F,N).
 
 % TODO: Write sister_of/2
 %      HINT: Use multiple clauses instead of disjunction
-sister_of(X,N) :- parent_of(F,N), parent_of(F,X), female(X), X /= N. 
+sister_of(X,N) :- parent_of(F,N), parent_of(F,X), female(X), X \= N. 
 
 % TODO: Write aunt_of/2
 aunt_of(X,N) :- parent_of(P,N), sister_of(X,P).
